@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TaxMeData.Models.RideRequest // Adjust the namespace accordingly
+
+@{
+    ViewBag.Title = "Request a Ride";
+}
+
+<h1>Request a Ride</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PickupLocation)
+        @Html.TextBoxFor(m => m.PickupLocation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PickupLocation)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DropoffLocation)
+        @Html.TextBoxFor(m => m.DropoffLocation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DropoffLocation)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Request Ride</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+}

@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<TaxMeData.Models.Location> // Adjust the namespace accordingly
+
+@{
+    ViewBag.Title = "Locations";
+}
+
+<h1>Locations</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Location</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Address</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var location in Model)
+        {
+            <tr>
+                <td>@location.Id</td>
+                <td>@location.Address</td>
+                <td>@location.Latitude</td>
+                <td>@location.Longitude</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = location.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Edit", new { id = location.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = location.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

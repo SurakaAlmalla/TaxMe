@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TaxMeData.Models.Location // Adjust the namespace accordingly
+
+@{
+    ViewBag.Title = "Edit Location";
+}
+
+<h1>Edit Location</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Latitude)
+        @Html.TextBoxFor(m => m.Latitude, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Latitude)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Longitude)
+        @Html.TextBoxFor(m => m.Longitude, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Longitude)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+}
