@@ -31,6 +31,7 @@ namespace TaxMeData.Models
         public string ImageUrl { get; set; }
 
         // Navigation property for rides  
+
         public virtual ICollection<Ride> Rides { get; set; }
 
         // Navigation property for ride requests  

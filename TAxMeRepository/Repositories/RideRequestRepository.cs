@@ -23,20 +23,23 @@ namespace TaxMeRepository.Repositories
 
             => _context.RideRequests.ToList();
 
-        public RideRequest GetRideRequestById(int id)
 
-            => _context.RideRequests.Find(id);
+        RideRequest IRideRequestRepository.GetRideRequestById(int id)
+         => _context.RideRequests.Find(id);
+
+        public IEnumerable<RideRequest> GetRideRequestByUserId(int userId)
+       => _context.RideRequests.Where(X => X.UserId == userId).ToList();
 
         public void AddRideRequest(RideRequest rideRequest)
         {
             _context.RideRequests.Add(rideRequest);
-            _context.SaveChanges();
+            
         }
 
         public void UpdateRideRequest(RideRequest rideRequest)
         {
             _context.Entry(rideRequest).State = EntityState.Modified;
-            _context.SaveChanges();
+            
         }
 
         public void DeleteRideRequest(int id)
@@ -45,8 +48,10 @@ namespace TaxMeRepository.Repositories
             if (rideRequest != null)
             {
                 _context.RideRequests.Remove(rideRequest);
-                _context.SaveChanges();
+               
             }
         }
+
+        
     }
 }

@@ -2,7 +2,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxMe - Taxi Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white p-4">
+        <h1 class="text-2xl">Welcome to TaxMe</h1>
+        <nav class="mt-2">
+            <ul class="flex space-x-4">
+                <li><a href="#users" class="hover:underline">Users</a></li>
+                <li><a href="#drivers" class="hover:underline">Drivers</a></li>
+                <li><a href="#rides" class="hover:underline">Rides</a></li>
+                <li><a href="#ride-requests" class="hover:underline">Ride Requests</a></li>
+                <li><a href="#payments" class="hover:underline">Payments</a></li>
+                <li><a href="#locations" class="hover:underline">Locations</a></li>
+            </ul>
+        </nav>
+    </header>
+     <main class="p-4">
+        <section id="users" class="mb-8">
+            <h2 class="text-xl font-bold">Users</h2>
+            <p>Users can request rides and have multiple ride requests.</p>
+        </section>
+        <section id="drivers" class="mb-8">
+            <h2 class="text-xl font-bold">Drivers</h2>
+            <p>Drivers can accept rides and are associated with multiple rides.</p>
+        </section>
+        <section id="rides" class="mb-8">
+            <h2 class="text-xl font-bold">Rides</h2>
+            <p>Each ride is associated with one user, one driver, and one payment.</p>
+        </section>
+        <section id="ride-requests" class="mb-8">
+            <h2 class="text-xl font-bold">Ride Requests</h2>
+            <p>Ride requests are made by users and can lead to rides.</p>
+        </section>
+        <section id="payments" class="mb-8">
+            <h2 class="text-xl font-bold">Payments</h2>
+            <p>Payments are associated with rides and are processed after a ride is completed.</p>
+        </section>
+        <section id="locations" class="mb-8">
+            <h2 class="text-xl font-bold">Locations</h2>
+            <p>Locations are managed by the location controller and can be created, edited, or deleted.</p>
+        </section>
+    </main> 
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>&copy; 2023 TaxMe. All rights reserved.</p>
+    </footer>
+</body>
+</html>    *@

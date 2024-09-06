@@ -1,97 +1,90 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TaxMeData.Models;
 using TaxMeRepository.Interfaces;
+using TaxMeService.interfaces;
 
 namespace TaxMe.Controllers
 {
     public class LocationController : Controller
     {
-        private readonly ILocationRepository _locationRepository;
+        private readonly ILocationService _locationService;
 
-        public LocationController(ILocationRepository locationRepository)
+        public LocationController(ILocationService locationService)
         {
-            _locationRepository = locationRepository;
+            _locationService = locationService;
         }
 
-        // GET: Location  
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
-            var locations = _locationRepository.GetAllLocations();
+            var locations = _locationService.GetAllLocations();
             return View(locations);
         }
 
-        // GET: Location/Details/5  
-        public ActionResult Details(int id)
-        {
-            var location = _locationRepository.GetLocationById(id);
-            if (location == null)
-            {
-                return RedirectToAction("NotFound", "Error");
-            }
-            return View(location);
-        }
-
-        // GET: Location/Create  
-        public ActionResult Create()
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Location/Create  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Location location)
+        public IActionResult Create(Location location)
         {
             if (ModelState.IsValid)
             {
-                _locationRepository.AddLocation(location);
-                return RedirectToAction("Index");
+                _locationService.AddLocation(location);
+                return RedirectToAction(nameof(Index));
             }
+            ModelState.AddModelError("LocationError", "valoidationError");
             return View(location);
         }
-
-        // GET: Location/Edit/5  
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Details(int? id, string viewName = "Details")
         {
-            var location = _locationRepository.GetLocationById(id);
-            if (location == null)
+            var location = _locationService.GetLocationById(id);
+            if (location is null)
             {
-                return RedirectToAction("NotFound", "Error");
+                return RedirectToAction("NotFoundPage", null, "Home");
             }
-            return View(location);
+            return View(viewName, location);
         }
 
-        // POST: Location/Edit/5  
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            //var location = _locationService.GetLocationById(id);
+
+            return Details(id, "Edit");
+        }
+
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Location location)
+        public IActionResult Edit(int? id, Location location)
         {
-            if (ModelState.IsValid)
-            {
-                _locationRepository.UpdateLocation(location);
-                return RedirectToAction("Index");
-            }
-            return View(location);
+            if (location.Id != id.Value)
+                return RedirectToAction("NotFoundPage", null, "Home");
+
+            _locationService.UpdateLocation(location);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Location/Delete/5  
-        public ActionResult Delete(int id)
+
+        [HttpPost]
+        //[HttpDelete] //this for hard delete
+        public IActionResult Delete(int id)
         {
-            var location = _locationRepository.GetLocationById(id);
-            if (location == null)
+            var location = _locationService.GetLocationById(id);
+            if (location is null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(location);
+            _locationService.DeleteLocation(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: Location/Delete/5  
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            _locationRepository.DeleteLocation(id);
-            return RedirectToAction("Index");
-        }
     }
 }

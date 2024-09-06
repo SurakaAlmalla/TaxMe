@@ -1,18 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model IEnumerable<TaxMeData.Models.Location> // Adjust the namespace accordingly
-
+﻿@model IEnumerable<TaxMeData.Models.Location> 
 @{
     ViewBag.Title = "Locations";
 }
 
 <h1>Locations</h1>
 
+@if(Model.Count()>0)
+{
 <p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Location</a>
+      <a asp-controller="Location" asp-action="Create" class="btn btn-primary">Create New Location</a>
+  @*  <a href="@Url.Action("Create")" class="btn btn-primary">Create New Location</a> *@
 </p>
 
 <table class="table">
@@ -37,8 +34,29 @@
                     <a href="@Url.Action("Details", new { id = location.Id })" class="btn btn-info">Details</a>
                     <a href="@Url.Action("Edit", new { id = location.Id })" class="btn btn-warning">Edit</a>
                     <a href="@Url.Action("Delete", new { id = location.Id })" class="btn btn-danger">Delete</a>
-                </td>
+                   @*  <td>
+                        <a asp-action="Details" asp-route-id="location.id" class="btn btn-info">
+                            <i class="=fas fa-eye"></i> Details
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="location.id" class="btn btn-warning">
+                            <i class="=fas fa-eye"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="location.id" class="btn btn-danger">
+                            <i class="=fas fa-eye"></i> Delete
+                        </a>
+                    
+                     </td> *@
             </tr>
         }
     </tbody>
 </table>
+}
+else { 
+    <div class="mt-5 allert alert-warning">
+    <h3>there is no location</h3>
+    </div>
+}

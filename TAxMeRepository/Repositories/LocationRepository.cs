@@ -23,20 +23,16 @@ namespace TaxMeRepository.Repositories
         
             => _context.Locations.ToList();
 
-        public Location GetLocationById(int id)
-       
-            => _context.Locations.Find(id);
-
         public void AddLocation(Location location)
         {
             _context.Locations.Add(location);
-            _context.SaveChanges();
+            
         }
 
         public void UpdateLocation(Location location)
         {
             _context.Entry(location).State = EntityState.Modified;
-            _context.SaveChanges();
+           
         }
 
         public void DeleteLocation(int id)
@@ -45,8 +41,11 @@ namespace TaxMeRepository.Repositories
             if (location != null)
             {
                 _context.Locations.Remove(location);
-                _context.SaveChanges();
+               
             }
         }
+
+        public Location GetLocationById(int? id)
+        => _context.Locations.Find(id);
     }
 }

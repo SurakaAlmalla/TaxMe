@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace TaxMeData.Models
 {
-    public class Ride
+    public class Ride 
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -28,13 +29,11 @@ namespace TaxMeData.Models
         public decimal Fare { get; set; }
 
         [Required]
-        public string Status { get; set; } // e.g., Pending, Completed, Cancelled  
+        public string Status { get; set; }
 
-        // Navigation properties  
         public virtual User User { get; set; }
         public virtual Driver Driver { get; set; }
 
-        // Navigation property for payment  
-        public virtual Payment Payment { get; set; }
+        public virtual pall Payment { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaxMeData.Models
 {
-    public class Payment
+    public class pall
     {
         public int Id { get; set; }
 

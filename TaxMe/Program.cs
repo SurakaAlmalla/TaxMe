@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using TaxMeData.Context;
 using TaxMeRepository.Interfaces;
 using TaxMeRepository.Repositories;
+using TaxMeService.interfaces;
+using TaxMeService.Mapping;
+using TaxMeService.Services.Locations;
+using TaxMeService.Services.Servic;
 
 namespace TaxMe
 {
@@ -21,11 +25,18 @@ namespace TaxMe
             });
 
             //builder.Services.AddTransient<ILocationRepository,LocationRepository>();
-            builder.Services.AddScoped<ILocationRepository, LocationRepository>();  // whene you work in on stait
+
             //builder.Services.AddSingleton<ILocationRepository, LocationRepository>();
 
+            //builder.Services.AddScoped<ILocationRepository, LocationRepository>();  // whene you work in on stait
 
-            builder.Services.AddScoped<IRideRequestRepository, RideRequestRepository>();
+            builder.Services.AddScoped<IUnitOfwork, UnitOfwork>();
+
+            builder.Services.AddScoped<ILocationService, LocationtService>();
+            builder.Services.AddScoped<IRideRequestService, RideRequestService>();
+
+            builder.Services.AddAutoMapper(X => X.AddProfile(new RideRequestProfile()));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -48,6 +59,8 @@ namespace TaxMe
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+          
         }
     }
 }

@@ -12,8 +12,8 @@ using TaxMeData.Context;
 namespace TaxMeData.Migrations
 {
     [DbContext(typeof(TaxMeDbContext))]
-    [Migration("20240829120113_init")]
-    partial class init
+    [Migration("20240901185639_Tax01")]
+    partial class Tax01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,38 +89,6 @@ namespace TaxMeData.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("TaxMeData.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsSuccessful")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RideId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RideId")
-                        .IsUnique();
-
-                    b.ToTable("Payments");
-                });
-
             modelBuilder.Entity("TaxMeData.Models.Ride", b =>
                 {
                     b.Property<int>("Id")
@@ -164,11 +132,11 @@ namespace TaxMeData.Migrations
 
             modelBuilder.Entity("TaxMeData.Models.RideRequest", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdReq")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReq"));
 
                     b.Property<string>("DropoffLocation")
                         .IsRequired()
@@ -181,14 +149,14 @@ namespace TaxMeData.Migrations
                     b.Property<DateTime>("RequestTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("Status_request")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdReq");
 
                     b.HasIndex("UserId");
 
@@ -235,15 +203,36 @@ namespace TaxMeData.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TaxMeData.Models.Payment", b =>
+            modelBuilder.Entity("TaxMeData.Models.pall", b =>
                 {
-                    b.HasOne("TaxMeData.Models.Ride", "Ride")
-                        .WithOne("Payment")
-                        .HasForeignKey("TaxMeData.Models.Payment", "RideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Ride");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsSuccessful")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RideId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RideId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("TaxMeData.Models.Ride", b =>
@@ -274,6 +263,17 @@ namespace TaxMeData.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TaxMeData.Models.pall", b =>
+                {
+                    b.HasOne("TaxMeData.Models.Ride", "Ride")
+                        .WithOne("Payment")
+                        .HasForeignKey("TaxMeData.Models.pall", "RideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ride");
                 });
 
             modelBuilder.Entity("TaxMeData.Models.Driver", b =>

@@ -1,9 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model TaxMeData.Models.RideRequest // Adjust the namespace accordingly
+﻿
+@model TaxMeData.Models.RideRequest 
 
 @{
     ViewBag.Title = "Delete Ride Request";
@@ -34,7 +30,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="hidden" name="id" value="@Model.IdReq" />
     <button type="submit" class="btn btn-danger">Delete</button>
     @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
 }

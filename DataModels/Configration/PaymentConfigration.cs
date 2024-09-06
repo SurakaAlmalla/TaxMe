@@ -9,9 +9,9 @@ using TaxMeData.Models;
 
 namespace TaxMeData.Configration
 {
-    public class PaymentConfigration : IEntityTypeConfiguration<Payment>
+    public class PaymentConfigration : IEntityTypeConfiguration<pall>
     {
-        public void Configure(EntityTypeBuilder<Payment> builder)
+        public void Configure(EntityTypeBuilder<pall> builder)
         {
            
         }

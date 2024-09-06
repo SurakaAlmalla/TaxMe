@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaxMeData.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Tax01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,17 +68,17 @@ namespace TaxMeData.Migrations
                 name: "RideRequests",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    IdReq = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     PickupLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DropoffLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RequestTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status_request = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RideRequests", x => x.Id);
+                    table.PrimaryKey("PK_RideRequests", x => x.IdReq);
                     table.ForeignKey(
                         name: "FK_RideRequests_Users_UserId",
                         column: x => x.UserId,

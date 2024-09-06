@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model TaxMeData.Models.RideRequest // Adjust the namespace accordingly
+﻿@model TaxMeData.Models.RideRequest 
 
 @{
     ViewBag.Title = "Request a Ride";
@@ -28,4 +23,6 @@
 
     <button type="submit" class="btn btn-primary">Request Ride</button>
     @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+
+    <a asp-action="Index" class="btn btn-light">back to list</a>
 }

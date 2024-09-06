@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaxMeData.Models;
 
-namespace TaxMeData.Models
+namespace TaxMeService.interfaces.Dto
 {
-    public class RideRequest
+    public class RideRequestDto
     {
         [Key]
         public int IdReq { get; set; }
@@ -26,7 +26,7 @@ namespace TaxMeData.Models
 
         [Required]
         public string Status_request { get; set; } = "Accepted";
- 
+
         public virtual User User { get; set; }
     }
 }

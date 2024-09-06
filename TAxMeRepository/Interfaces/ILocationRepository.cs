@@ -9,10 +9,10 @@ namespace TaxMeRepository.Interfaces
 {
     public interface ILocationRepository
     {
-        IEnumerable<Location> GetAllLocations(); // Retrieve all locations  
-        Location GetLocationById(int id); // Retrieve a specific location by ID  
-        void AddLocation(Location location); // Add a new location  
-        void UpdateLocation(Location location); // Update an existing location  
-        void DeleteLocation(int id); // Delete a location by ID  
+        IEnumerable<Location> GetAllLocations(); 
+        Location GetLocationById(int? id);  
+        void AddLocation(Location location); 
+        void UpdateLocation(Location location);   
+        void DeleteLocation(int id); 
     }
 }

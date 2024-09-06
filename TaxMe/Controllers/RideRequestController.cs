@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaxMe.Models;
 using TaxMeData.Models;
 using TaxMeRepository.Interfaces;
 
@@ -13,15 +14,24 @@ namespace TaxMe.Controllers
             _rideRequestRepository = rideRequestRepository;
         }
 
-        // GET: RideRequest  
-        public ActionResult Index()
+        // GET:   
+        public IActionResult Index(int userId)
         {
-            var rideRequests = _rideRequestRepository.GetAllRideRequests();
-            return View(rideRequests);
+            IEnumerable<RideRequest> rideRequest = new List<RideRequest>();
+
+            if (string.IsNullOrEmpty(Convert.ToString(userId)))
+           
+                rideRequest = _rideRequestRepository.GetAllRideRequests();
+            else 
+                rideRequest = _rideRequestRepository.GetRideRequestByUserId(userId);
+
+                return View(rideRequest);
+           
+            
         }
 
-        // GET: RideRequest/Details/5  
-        public ActionResult Details(int id)
+        // GET:  
+        public IActionResult Details(int id)
         {
             var rideRequest = _rideRequestRepository.GetRideRequestById(id);
             if (rideRequest == null)
@@ -31,16 +41,17 @@ namespace TaxMe.Controllers
             return View(rideRequest);
         }
 
-        // GET: RideRequest/Create  
-        public ActionResult Create()
+        // GET:  
+        public IActionResult Create()
         {
+
             return View();
         }
-
-        // POST: RideRequest/Create  
+ 
+        // POST:  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RideRequest rideRequest)
+        public IActionResult Create(TaxMeData.Models.RideRequest rideRequest)
         {
             if (ModelState.IsValid)
             {
@@ -50,8 +61,8 @@ namespace TaxMe.Controllers
             return View(rideRequest);
         }
 
-        // GET: RideRequest/Edit/5  
-        public ActionResult Edit(int id)
+        // GET: 
+        public IActionResult Edit(int id)
         {
             var rideRequest = _rideRequestRepository.GetRideRequestById(id);
             if (rideRequest == null)
@@ -61,10 +72,10 @@ namespace TaxMe.Controllers
             return View(rideRequest);
         }
 
-        // POST: RideRequest/Edit/5  
+        // POST:  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RideRequest rideRequest)
+        public IActionResult Edit(TaxMeData.Models.RideRequest rideRequest)
         {
             if (ModelState.IsValid)
             {
@@ -74,8 +85,8 @@ namespace TaxMe.Controllers
             return View(rideRequest);
         }
 
-        // GET: RideRequest/Delete/5  
-        public ActionResult Delete(int id)
+        // GET: 
+        public IActionResult Delete(int id)
         {
             var rideRequest = _rideRequestRepository.GetRideRequestById(id);
             if (rideRequest == null)
@@ -88,10 +99,11 @@ namespace TaxMe.Controllers
         // POST: RideRequest/Delete/5  
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             _rideRequestRepository.DeleteRideRequest(id);
             return RedirectToAction("Index");
         }
+
     }
 }

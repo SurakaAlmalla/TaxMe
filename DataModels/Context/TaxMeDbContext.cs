@@ -26,6 +26,9 @@ namespace TaxMeData.Context
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+
+          //modelBuilder.Entity<Location>().HasQueryFilter(X => !X.isdeleted);  //this for chec that all record is not deleted
+
         }
 
         public DbSet<User> Users { get; set; }
@@ -36,7 +39,7 @@ namespace TaxMeData.Context
 
         public DbSet<Location> Locations { get; set; }
 
-        public DbSet<Payment> Payments { get; set; }
+        public DbSet<pall> Payments { get; set; }
 
         public DbSet<RideRequest> RideRequests { get; set; }
 
