@@ -13,7 +13,7 @@ namespace TaxMeRepository.Interfaces
         RideRequest GetRideRequestById(int id);
         void AddRideRequest(RideRequest rideRequest);   
         void UpdateRideRequest(RideRequest rideRequest);   
-        void DeleteRideRequest(int id);
+        void DeleteRideRequest(RideRequest rideRequest);
         IEnumerable<RideRequest> GetRideRequestByUserId(int userId);
     }
 }

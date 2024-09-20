@@ -42,9 +42,8 @@ namespace TaxMeRepository.Repositories
             
         }
 
-        public void DeleteRideRequest(int id)
-        {
-            var rideRequest = _context.RideRequests.Find(id);
+        public void DeleteRideRequest(RideRequest rideRequest)
+        { 
             if (rideRequest != null)
             {
                 _context.RideRequests.Remove(rideRequest);

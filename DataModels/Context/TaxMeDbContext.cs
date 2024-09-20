@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,9 @@ using TaxMeData.Models;
 
 namespace TaxMeData.Context
 {
-    public class TaxMeDbContext : DbContext
+    public class TaxMeDbContext : IdentityDbContext<ApplicationUser>
     {
+       
         public TaxMeDbContext(DbContextOptions<TaxMeDbContext> options) : base(options)
         {
         }

@@ -126,7 +126,8 @@ namespace TaxMeService.Services.Servic
             //    User = rideRequestDto.User
 
             //};
-            _unitOfWork.rideRequestRepository.UpdateRideRequest(RideRequestDto);
+            RideRequest rideRequest = _mapper.Map<RideRequest>(rideRequestDto);
+            _unitOfWork.rideRequestRepository.UpdateRideRequest(rideRequest);
            _unitOfWork.complete();
         }
     }

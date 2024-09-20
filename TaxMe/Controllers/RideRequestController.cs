@@ -2,30 +2,33 @@
 using TaxMe.Models;
 using TaxMeData.Models;
 using TaxMeRepository.Interfaces;
+using TaxMeService.interfaces;
+using TaxMeService.interfaces.Dto;
+using TaxMeService.Services.Servic;
 
 namespace TaxMe.Controllers
 {
     public class RideRequestController : Controller
     {
-        private readonly IRideRequestRepository _rideRequestRepository;
+        private readonly IRideRequestService _rideRequestService;
 
-        public RideRequestController(IRideRequestRepository rideRequestRepository)
+        public RideRequestController(IRideRequestService rideRequestService)
         {
-            _rideRequestRepository = rideRequestRepository;
+            _rideRequestService = rideRequestService;
         }
 
         // GET:   
         public IActionResult Index(int userId)
         {
-            IEnumerable<RideRequest> rideRequest = new List<RideRequest>();
+            IEnumerable<RideRequestDto> rideRequests = new List<RideRequestDto>();
 
             if (string.IsNullOrEmpty(Convert.ToString(userId)))
            
-                rideRequest = _rideRequestRepository.GetAllRideRequests();
+                rideRequests = _rideRequestService.GetAllRideRequests();
             else 
-                rideRequest = _rideRequestRepository.GetRideRequestByUserId(userId);
+                rideRequests = _rideRequestService.GetRideRequestByUserId(userId);
 
-                return View(rideRequest);
+                return View(rideRequests);
            
             
         }
@@ -33,7 +36,7 @@ namespace TaxMe.Controllers
         // GET:  
         public IActionResult Details(int id)
         {
-            var rideRequest = _rideRequestRepository.GetRideRequestById(id);
+            var rideRequest = _rideRequestService.GetRideRequestById(id);
             if (rideRequest == null)
             {
                 return RedirectToAction("NotFound", "Error");
@@ -44,18 +47,18 @@ namespace TaxMe.Controllers
         // GET:  
         public IActionResult Create()
         {
-
+            ViewBag.RideRequest =_rideRequestService.GetAllRideRequests();
             return View();
         }
  
         // POST:  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TaxMeData.Models.RideRequest rideRequest)
+        public IActionResult Create(RideRequestDto rideRequest)
         {
             if (ModelState.IsValid)
             {
-                _rideRequestRepository.AddRideRequest(rideRequest);
+                _rideRequestService.AddRideRequest(rideRequest);
                 return RedirectToAction("Index");
             }
             return View(rideRequest);
@@ -64,7 +67,7 @@ namespace TaxMe.Controllers
         // GET: 
         public IActionResult Edit(int id)
         {
-            var rideRequest = _rideRequestRepository.GetRideRequestById(id);
+            var rideRequest = _rideRequestService.GetRideRequestById(id);
             if (rideRequest == null)
             {
                 return RedirectToAction("NotFound", "Error");
@@ -75,11 +78,11 @@ namespace TaxMe.Controllers
         // POST:  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(TaxMeData.Models.RideRequest rideRequest)
+        public IActionResult Edit(RideRequestDto rideRequest)
         {
             if (ModelState.IsValid)
             {
-                _rideRequestRepository.UpdateRideRequest(rideRequest);
+                _rideRequestService.UpdateRideRequest(rideRequest);
                 return RedirectToAction("Index");
             }
             return View(rideRequest);
@@ -88,7 +91,7 @@ namespace TaxMe.Controllers
         // GET: 
         public IActionResult Delete(int id)
         {
-            var rideRequest = _rideRequestRepository.GetRideRequestById(id);
+            var rideRequest = _rideRequestService.GetRideRequestById(id);
             if (rideRequest == null)
             {
                 return RedirectToAction("NotFound", "Error");
@@ -99,9 +102,9 @@ namespace TaxMe.Controllers
         // POST: RideRequest/Delete/5  
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(RideRequestDto rideRequest)
         {
-            _rideRequestRepository.DeleteRideRequest(id);
+            _rideRequestService.DeleteRideRequest(rideRequest);
             return RedirectToAction("Index");
         }
 
