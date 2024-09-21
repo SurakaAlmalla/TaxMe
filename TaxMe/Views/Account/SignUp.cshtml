@@ -1,4 +1,4 @@
-﻿
+﻿@model SignUpViewModel
 @{
     ViewData["Title"] = "SignUp";
     Layout = "~/Views/Shared/AuthLayout.cshtml";
@@ -6,25 +6,62 @@
 
 <h1>SignUp</h1>
 
-<form action="#" method="post">
-    <div class="form-group first">
+<form asp-action="SignUp" method="post">
+    <div asp-validation-summary="All"></div>
+    @* <div class="form-group first">
         <label for="username">Username</label>
         <input type="text" class="form-control" placeholder="your-email@gmail.com" id="username">
+       </div>
+       <div class="form-group last mb-3">
+         <label for="password">Password</label>
+         <input type="password" class="form-control" placeholder="Your Password" id="password">
+       </div> 
+    *@
+    <div class="form-group first">
+        <label for="firstname">FirstName</label>
+        <input type="text" asp-for="FirstName" class="form-control" placeholder="FirstName">
     </div>
-    <div class="form-group last mb-3">
+
+    <div class="form-group first">
+        <label for="lastname">LastName</label>
+        <input type="text" asp-for="LastName" class="form-control" placeholder="almalla" >
+    </div>
+
+    <div class="form-group first">
+        <label for="email">Email</label>
+        <input type="text" asp-for="Email" class="form-control" placeholder="Email">
+    </div>
+
+    <div class="form-group first">
         <label for="password">Password</label>
-        <input type="password" class="form-control" placeholder="Your Password" id="password">
+        <input type="password" asp-for="Password" class="form-control" placeholder="Password">
     </div>
+
+    <div class="form-group first">
+        <label for="confirmpassword">ConfirmPassword</label>
+        <input type="password" asp-for="ConfirmPassword" class="form-control" placeholderConfirmPassword >
+    </div>
+
+
+    <div class="wthree-text">
+        <label class="animated">
+            <input asp-for="IsAgree" class="checkbox" required="" class="form-control" />
+            <span > I Agree To The Terms & Conditions</span>
+        </label>
+        <div class="clear"></div>
+    </div>
+    <input type="submit" value="Sign Up" class="btn btn-block btn-primary">
 
     <div class="d-flex mb-5 align-items-center">
         <label class="control control--checkbox mb-0">
             <span class="caption">Remember me</span>
+            <br />
             <input type="checkbox" checked="checked" />
             <div class="control__indicator"></div>
         </label>
-        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+        <span class="ml-auto"><a href="#" class="forgot-pass">  Forgot Password</a></span>
     </div>
 
-    <input type="submit" value="Log In" class="btn btn-block btn-primary">
-
+    
 </form>
+<p class="text-white"> Do you Have an Account ? <a asp-action="LogIn">LogIn Now</a></p>

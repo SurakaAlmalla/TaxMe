@@ -63,7 +63,7 @@ namespace TaxMe
                 options.LoginPath = "/Account/login";
                 options.LogoutPath = "/Account/login";
                 options.AccessDeniedPath = "/Account/AccessDenide";
-                options.Cookie.Name = "Suraka Cookies";
+            
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.SameSite = SameSiteMode.Strict;
             });
@@ -89,7 +89,7 @@ namespace TaxMe
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=SignUp}");
 
             app.Run();
 

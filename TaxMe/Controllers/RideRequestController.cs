@@ -29,8 +29,7 @@ namespace TaxMe.Controllers
                 rideRequests = _rideRequestService.GetRideRequestByUserId(userId);
 
                 return View(rideRequests);
-           
-            
+    
         }
 
         // GET:  
